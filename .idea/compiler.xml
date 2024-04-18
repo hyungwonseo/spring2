@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="firstapp" />
         <module name="gameshop" />
+        <module name="trading-company" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="firstapp" options="-parameters" />
       <module name="gameshop" options="-parameters" />
+      <module name="trading-company" options="-parameters" />
     </option>
   </component>
 </project>
