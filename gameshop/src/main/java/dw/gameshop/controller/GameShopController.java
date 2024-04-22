@@ -41,6 +41,18 @@ public class GameShopController {
         return new ResponseEntity<>(gameShopService.saveUser(user),
                 HttpStatus.OK);
     }
+
+    @GetMapping("/products/maxprice")
+    public ResponseEntity<Game> getGameWithMaxPrice() {
+        return new ResponseEntity<>(gameShopService.getGameWithMaxPrice(),
+                HttpStatus.OK);
+    }
+
+    @GetMapping("/products/maxpricetop3")
+    public ResponseEntity<List<Game>> getGameWithMaxPriceTop3() {
+        return new ResponseEntity<>(gameShopService.getGameWithMaxPriceTop3(),
+                HttpStatus.OK);
+    }
 }
 
 
