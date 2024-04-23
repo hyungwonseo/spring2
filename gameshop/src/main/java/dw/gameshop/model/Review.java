@@ -28,6 +28,16 @@ public class Review {
     private int point;
     @Column(name="review_text", length=65535)
     private String reviewText;
-    @Column(name="created_at")
+
+    @Column(name="created_at", updatable = false)
     private LocalDateTime createdAt;
 }
+
+
+
+
+
+
+
+
+

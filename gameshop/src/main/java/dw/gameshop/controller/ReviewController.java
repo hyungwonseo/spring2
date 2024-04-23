@@ -1,6 +1,5 @@
 package dw.gameshop.controller;
 
-import dw.gameshop.dto.ReviewDto;
 import dw.gameshop.model.Review;
 import dw.gameshop.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +26,6 @@ public class ReviewController {
     @GetMapping("/reviews")
     public ResponseEntity<List<Review>> getReviewAll() {
         return new ResponseEntity<>(reviewService.getReviewAll(),
-                HttpStatus.OK);
-    }
-
-    @GetMapping("/reviews/dto")
-    public ResponseEntity<List<ReviewDto>> getReviewAllByDto() {
-        return new ResponseEntity<>(reviewService.getReviewAllByDto(),
                 HttpStatus.OK);
     }
 }
