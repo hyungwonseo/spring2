@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="firstapp" />
+        <module name="wholesale_company" />
         <module name="gameshop" />
       </profile>
     </annotationProcessing>
@@ -20,6 +21,7 @@
       <module name="firstapp" options="-parameters" />
       <module name="gameshop" options="-parameters" />
       <module name="trading-company" options="-parameters" />
+      <module name="wholesale_company" options="-parameters" />
     </option>
   </component>
 </project>
