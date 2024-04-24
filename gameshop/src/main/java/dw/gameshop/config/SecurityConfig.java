@@ -29,9 +29,11 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> auth
                         .requestMatchers(
                                 new AntPathRequestMatcher("/user/login"),
-                                new AntPathRequestMatcher("/user/signup")
+                                new AntPathRequestMatcher("/user/signup"),
+                                new AntPathRequestMatcher("/login")
                         ).permitAll()
                         .anyRequest().authenticated())
+                .formLogin(form->form.loginPage("/login").defaultSuccessUrl("/articles"))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .csrf(AbstractHttpConfigurer::disable)
