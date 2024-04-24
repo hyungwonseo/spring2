@@ -25,4 +25,17 @@ public class ProductController {
         return new ResponseEntity<>(productService.getProductByInventoryUnder(num),
                 HttpStatus.OK);
     }
+
+    @GetMapping("/products/{productName}")
+    public ResponseEntity<List<Product>> getProductByProductName(@PathVariable String productName) {
+        return new ResponseEntity<>(productService.getProductByProductName(productName),
+                HttpStatus.OK);
+    }
+
+    @GetMapping("/products/price")
+    public ResponseEntity<List<Product>> getProductByPriceRange(@RequestParam int low,
+                                                                @RequestParam int high) {
+        return new ResponseEntity<>(productService.getProductByPriceRange(low, high),
+                HttpStatus.OK);
+    }
 }

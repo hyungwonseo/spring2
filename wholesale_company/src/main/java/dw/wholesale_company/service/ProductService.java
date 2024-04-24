@@ -23,4 +23,19 @@ public class ProductService {
         return productList.stream().filter(p->p.getInventory() < num)
                 .collect(Collectors.toList());
     }
+
+    //제품 중에서 ‘주스’ 제품에 대한 모든 정보를 검색하시오.
+    public List<Product> getProductByProductName(String productName) {
+        List<Product> productList = productRepository.findAll();
+        return productList.stream().filter(product -> product.getProductName().contains(productName))
+                    .collect(Collectors.toList());
+    }
+
+    //제품 단가가 5,000원 이상 10,000원 이하인 제품에는 무엇이 있는지 검색하시오.
+    public List<Product> getProductByPriceRange(int lowPrice, int highPrice) {
+        List<Product> productList = productRepository.findAll();
+        return productList.stream().filter(product ->
+                product.getUnitPrice() >= lowPrice && product.getUnitPrice() <= highPrice)
+                .collect(Collectors.toList());
+    }
 }
