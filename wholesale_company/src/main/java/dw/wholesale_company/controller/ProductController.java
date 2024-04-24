@@ -38,4 +38,10 @@ public class ProductController {
         return new ResponseEntity<>(productService.getProductByPriceRange(low, high),
                 HttpStatus.OK);
     }
+
+    @GetMapping("/products/idlist")
+    public ResponseEntity<List<Product>> getProductByIdWithList(@RequestBody List<Long> idList) {
+        return new ResponseEntity<>(productService.getProductByIdWithList(idList),
+                HttpStatus.OK);
+    }
 }

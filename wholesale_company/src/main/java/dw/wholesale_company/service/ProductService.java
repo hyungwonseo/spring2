@@ -38,4 +38,20 @@ public class ProductService {
                 product.getUnitPrice() >= lowPrice && product.getUnitPrice() <= highPrice)
                 .collect(Collectors.toList());
     }
+
+    //제품 제품번호가 1, 2, 4, 7, 11, 20인 제품의 모든 정보를 보이시오.
+    public List<Product> getProductByIdWithList(List<Long> idList) {
+        List<Product> productList = productRepository.findAll();
+//        List<Product> newProducts = new ArrayList<>();
+//        for(int i=0; i<productList.size(); i++) {
+//            for(int j=0; j< idList.size(); j++) {
+//                if (productList.get(i).getProductId() == idList.get(j)) {
+//                    newProducts.add(productList.get(i));
+//                }
+//            }
+//        }
+//        return newProducts;
+        return productList.stream().filter(product -> idList.contains(product.getProductId()))
+                .collect(Collectors.toList());
+    }
 }
