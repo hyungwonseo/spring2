@@ -33,4 +33,11 @@ public class OrderService {
         return orders.stream().filter(a -> a.getOrderDate().compareTo(date) > 0)
                 .collect(Collectors.toList());
     }
+
+    //2020년 4월 9일에 주문한 고객의 모든 정보를 보이시오.
+    public List<Customer> getCustomerByOrderDate(LocalDate orderDate) {
+        List<Order> orders = orderRepository.findByOrderDate(orderDate);
+        return orders.stream().map(order -> order.getCustomer())
+                .collect(Collectors.toList());
+    }
 }

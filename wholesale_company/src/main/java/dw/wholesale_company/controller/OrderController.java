@@ -29,4 +29,10 @@ public class OrderController {
         return new ResponseEntity<>(orderService.getOrderByDateAfter(date),
                 HttpStatus.OK);
     }
+
+    @GetMapping("/orders/orderdate/{orderDate}")
+    public ResponseEntity<List<Customer>> getCustomerByOrderDate(@PathVariable LocalDate orderDate) {
+        return new ResponseEntity<>(orderService.getCustomerByOrderDate(orderDate),
+                HttpStatus.OK);
+    }
 }
