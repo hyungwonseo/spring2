@@ -39,6 +39,15 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    //제품 재고금액이 높은 상위 10개 제품
+    public List<Product> getProductByInventoryPrice(int limit) {
+        List<Product> productList = productRepository.findAll();
+        return productList.stream().sorted(Comparator.comparingInt(
+                (Product p) -> p.getUnitPrice() * p.getInventory()).reversed())
+                .limit(limit)
+                .collect(Collectors.toList());
+    }
+
     //제품 제품번호가 1, 2, 4, 7, 11, 20인 제품의 모든 정보를 보이시오.
     public List<Product> getProductByIdWithList(List<Long> idList) {
         List<Product> productList = productRepository.findAll();
@@ -51,7 +60,14 @@ public class ProductService {
 //            }
 //        }
 //        return newProducts;
-        return productList.stream().filter(product -> idList.contains(product.getProductId()))
+//        return productList.stream().filter(product -> idList.contains(product.getProductId()))
+//                .collect(Collectors.toList());
+        return idList.stream()
+                .map(id -> {
+                    Optional<Product> p = productRepository.findById(id);
+                    return p.isPresent() ? p.get() : null;
+                })
+                .filter(p -> p != null)
                 .collect(Collectors.toList());
     }
 }

@@ -41,13 +41,8 @@ public class UserController {
                 new UsernamePasswordAuthenticationToken(userDto.getUserId(), userDto.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        // Create a session ID using Spring Security's session management
-        HttpSession session = httpServletRequest.getSession(true);
-        String sessionId = session.getId();
 
-        // Prepare the response with session ID
-        String responseMessage = "Success. Session ID: " + sessionId;
-        return ResponseEntity.ok(responseMessage);
+        return ResponseEntity.ok("Success");
     }
 
     @GetMapping("current")

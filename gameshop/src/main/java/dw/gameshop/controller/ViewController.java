@@ -10,7 +10,7 @@ public class ViewController {
         return "login";
     }
 
-    @GetMapping("/article")
+    @GetMapping("/articles")
     public String article() {
         return "article";
     }
