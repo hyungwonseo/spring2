@@ -29,7 +29,8 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/grade/{grade}")
-    public ResponseEntity<List<Customer>> getCustomerByMileageGrade(@PathVariable String grade) {
+    public ResponseEntity<List<Customer>> getCustomerByMileageGrade(
+                                                    @PathVariable String grade) {
         return new ResponseEntity<>(customerService.getCustomerByMileageGrade(grade),
                 HttpStatus.OK);
     }

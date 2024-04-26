@@ -35,7 +35,7 @@ public class CustomerService {
                 .collect(Collectors.toList());
     }
 
-    //마일리지 등급명별로 고객수를 보이시오.
+    //마일리지 등급명별로 고객의 정보를 보이시오.
     public List<Customer> getCustomerByMileageGrade(String grade) {
         Optional<Mileage> mileageOptional = mileageRepository.findById(grade);
         if (mileageOptional.isEmpty()) {
