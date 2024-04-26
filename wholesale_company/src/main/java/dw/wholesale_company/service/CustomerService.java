@@ -34,4 +34,17 @@ public class CustomerService {
         return customers.stream().filter(c->c.getMileage() > avg)
                 .collect(Collectors.toList());
     }
+
+    //마일리지 등급명별로 고객수를 보이시오.
+    public List<Customer> getCustomerByMileageGrade(String grade) {
+        Optional<Mileage> mileageOptional = mileageRepository.findById(grade);
+        if (mileageOptional.isEmpty()) {
+            throw new ResourceNotFoundException("Mileage", "Grade", grade);
+        }
+        List<Customer> customers = customerRepository.findAll();
+        return customers.stream().filter(customer ->
+                    customer.getMileage() >= mileageOptional.get().getLowLimit()
+                    && customer.getMileage() <= mileageOptional.get().getHighLimit())
+                .collect(Collectors.toList());
+    }
 }
