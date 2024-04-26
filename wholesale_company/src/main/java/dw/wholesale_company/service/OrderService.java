@@ -46,7 +46,7 @@ public class OrderService {
     public List<Object[]> getTopCitiesByTotalOrderAmount(int limit) {
         List<Object[]> cities = orderRepository.getTopCitiesByTotalOrderAmount();
         return cities.stream().limit(limit).collect(Collectors.toList());
-//        return entityManager.createQuery(
+        //        return entityManager.createQuery(
 //                        "SELECT c.city, SUM(od.orderQuantity * od.unitPrice) " +
 //                                "FROM OrderDetail od " +
 //                                "JOIN od.order o " +
