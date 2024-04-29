@@ -10,6 +10,7 @@
         <module name="firstapp" />
         <module name="wholesale_company" />
         <module name="gameshop" />
+        <module name="jdbcproject" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -20,6 +21,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="firstapp" options="-parameters" />
       <module name="gameshop" options="-parameters" />
+      <module name="jdbcproject" options="-parameters" />
       <module name="trading-company" options="-parameters" />
       <module name="wholesale_company" options="-parameters" />
     </option>
