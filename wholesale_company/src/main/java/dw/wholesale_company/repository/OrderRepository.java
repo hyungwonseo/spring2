@@ -28,4 +28,15 @@ public interface OrderRepository extends JpaRepository<Order, String> {
             ") " +
             "GROUP BY YEAR(o.orderDate)")
     List<Object[]> getOrderCountByYearForCity(@Param("city") String city);
+
+    @Query("SELECT o FROM Order o WHERE YEAR(o.orderDate) = :year")
+    List<Order> findByOrderYear(@Param("year") int year);
+
+    @Query("SELECT o FROM Order o WHERE YEAR(o.orderDate) = :year")
+    List<Order> findByYear(@Param("year") int year);
+
+    List<Order> findByOrderId(String orderId);
+
+    @Query("SELECT o FROM Order o WHERE EXTRACT(YEAR FROM o.orderDate) = :year")
+    List<Order> findByOrderDateYear(@Param("year") int year);
 }
