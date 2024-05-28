@@ -28,6 +28,7 @@ public class SecurityConfig {
         return http
                 .authorizeRequests(auth -> auth
                         .requestMatchers(
+                                new AntPathRequestMatcher("/products/**"),
                                 new AntPathRequestMatcher("/user/login"),
                                 new AntPathRequestMatcher("/user/signup"),
                                 new AntPathRequestMatcher("/login")
