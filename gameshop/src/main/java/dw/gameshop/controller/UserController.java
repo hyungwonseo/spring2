@@ -4,6 +4,7 @@ import dw.gameshop.dto.UserDto;
 import dw.gameshop.service.UserDetailService;
 import dw.gameshop.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +51,15 @@ public class UserController {
                 SecurityContextHolder.getContext());
 
         return ResponseEntity.ok("Success");
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "You have been logged out.";
     }
 
     @GetMapping("current")
