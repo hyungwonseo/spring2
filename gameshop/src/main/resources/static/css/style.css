@@ -145,7 +145,7 @@
   cursor: pointer;
   margin: 50px;
 }
-.loginBtn:hover,.logoutBtn:hover,.purchaseBtn:hover {
+.loginBtn:hover,.logoutBtn:hover,.purchaseBtn:hover,.cartBtn:hover {
   background-color: lightblue;
   color: dodgerblue;
 }
