@@ -53,4 +53,19 @@ function displaySingleProduct(data) {
   game.appendChild(img);  
   game.appendChild(lowBox);  
   product.appendChild(game);
+
+  document.querySelector(".cartBtn").addEventListener("click", ()=>{
+    sessionCurrent();
+  });
+}
+
+function sessionCurrent() {
+  axios
+  .get("http://localhost:8080/user/current", {withCredentials: true})
+  .then((response)=>{
+    console.log("데이터:", response.data);
+  })
+  .catch((error)=>{
+    console.log("에러 발생:", error);
+  })
 }
