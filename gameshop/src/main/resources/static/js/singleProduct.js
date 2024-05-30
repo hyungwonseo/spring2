@@ -16,26 +16,41 @@ axios
 
 function displaySingleProduct(data) {
   const product = document.querySelector(".product");
+  // 태그 요소 생성
   const game = document.createElement("div");
-  game.classList.add("game");
   const img = document.createElement("img");
-  img.src = data.image;
-  img.classList.add("image");
-  game.appendChild(img);
   const title = document.createElement("p");
   const genre = document.createElement("p");
   const price = document.createElement("p");
   const text = document.createElement("p");
+  const lowBox = document.createElement("div");
+  const left = document.createElement("div");
+  const right = document.createElement("div");
+  const cartBtn = document.createElement("div");
+  // 클래스이름 생성
+  game.classList.add("game");
+  img.classList.add("image");
+  lowBox.classList.add("low-box");
+  cartBtn.classList.add("cartBtn");
+  // 태그속성추가
+  img.src = data.image;
   title.textContent = "게임 타이틀 : " + data.title;
   genre.textContent = "게임 장르 : " + data.genre;
   price.textContent = "게임 가격 : " + data.price + "원";
   text.textContent = data.text;
-  game.appendChild(title);
-  game.appendChild(genre);
-  game.appendChild(price);
-  game.appendChild(text);
   game.style.setProperty("box-shadow", "initial", "important");
   game.style.setProperty("transform", "initial", "important");
   game.style.setProperty("cursor", "initial", "important");
+  cartBtn.textContent = "장바구니담기";
+  // appendChild 부모자식 위치 설정
+  right.appendChild(cartBtn);
+  left.appendChild(title);
+  left.appendChild(genre);
+  left.appendChild(price);
+  left.appendChild(text);
+  lowBox.appendChild(left);
+  lowBox.appendChild(right);
+  game.appendChild(img);  
+  game.appendChild(lowBox);  
   product.appendChild(game);
 }
