@@ -144,6 +144,7 @@
   border-radius: 5px;
   cursor: pointer;
   margin: 50px;
+  display: inline-block;
 }
 .loginBtn:hover,.logoutBtn:hover,.purchaseBtn:hover,.cartBtn:hover {
   background-color: lightblue;
@@ -175,6 +176,34 @@
   border-radius: 5px;
   cursor: pointer;
   margin: 0 auto;
+}
+.cart {
+  width: 100%;
+  background-color: khaki;
+  padding: 20px;
+}
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: white;
+}
+.cart-table td {
+  text-align: center;
+}
+thead {
+  background: #27ae60;
+  height: 50px;
+}
+tr:nth-child(even) td {
+  background: #eaeaed;
+}
+.imgtd {
+  width: 200px;
+}
+.totalprice {
+  display: inline-block;
 }
 /* hidden 클래스 스타일은 파일의 제일 아래에 놓자!! */
 .hidden {
