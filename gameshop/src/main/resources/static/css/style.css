@@ -176,6 +176,7 @@
   cursor: pointer;
   margin: 0 auto;
 }
+/* hidden 클래스 스타일은 파일의 제일 아래에 놓자!! */
 .hidden {
   display: none;
 }
