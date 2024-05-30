@@ -50,12 +50,10 @@ function sessionCurrent() {
     console.log("데이터:", response);
     if (response.status == 200) {
       console.log("세션 유지");
-      if (response.status == 200) {
-        document.querySelector(".login-box").classList.add("hidden");
-        document.querySelector(".user-box").classList.remove("hidden");
-        document.querySelector(".user-box p").textContent
-          = response.data + "님, 환영합니다.";
-      }
+      document.querySelector(".login-box").classList.add("hidden");
+      document.querySelector(".user-box").classList.remove("hidden");
+      document.querySelector(".user-box p").textContent
+        = response.data + "님, 환영합니다.";
     }
   })
   .catch((error)=>{
