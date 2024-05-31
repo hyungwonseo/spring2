@@ -1,6 +1,7 @@
 package dw.gameshop.service;
 
 import dw.gameshop.dto.UserDto;
+import dw.gameshop.model.Authority;
 import dw.gameshop.model.User;
 import dw.gameshop.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -21,10 +22,13 @@ public class UserService {
     }
 
     public String saveUser(UserDto userDto) {
+        Authority authority = new Authority();
+        authority.setAuthorityName("ROLE_USER");
         User user = new User(userDto.getUserId(),
                 userDto.getUserName(),
                 userDto.getUserEmail(),
                 bCryptPasswordEncoder.encode(userDto.getPassword()),
+                authority,
                 LocalDateTime.now());
         return userRepository.save(user).getUserId();
     }
