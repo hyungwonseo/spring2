@@ -93,6 +93,7 @@
   background-color: khaki;
   display: flex;
   align-items: center;
+  padding: 50px;
 }
 .login-box {
   width: 450px;
