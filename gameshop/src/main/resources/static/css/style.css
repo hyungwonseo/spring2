@@ -193,11 +193,11 @@
   text-align: center;
 }
 thead {
-  background: #27ae60;
+  background-color: #27ae60;
   height: 50px;
 }
-tr:nth-child(even) td {
-  background: #eaeaed;
+.tr:nth-child(even) td {
+  background-color: #eaeaed;
 }
 .imgtd {
   width: 200px;
@@ -205,6 +205,7 @@ tr:nth-child(even) td {
 .totalprice {
   display: inline-block;
 }
+
 /* hidden 클래스 스타일은 파일의 제일 아래에 놓자!! */
 .hidden {
   display: none;

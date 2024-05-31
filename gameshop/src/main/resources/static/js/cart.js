@@ -22,6 +22,7 @@ function sessionCurrent() {
               .then((response)=>{
                 console.log("데이터:", response.data);
                 localStorage.removeItem(userId);
+                window.location.reload();
               })
               .catch((error)=>{
                 console.log("에러 발생:", error);
@@ -44,10 +45,10 @@ function displayCart(games) {
     // 태그 요소 생성
     const tr = document.createElement("tr");
     const imgtd = document.createElement("td");
-    const img = document.createElement("img");
     const title = document.createElement("td");
     const genre = document.createElement("td");
     const price = document.createElement("td");
+    const img = document.createElement("img");
     // 클래스이름 생성
     imgtd.classList.add("imgtd");
     img.classList.add("image");
