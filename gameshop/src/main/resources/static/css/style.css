@@ -90,7 +90,6 @@
   margin: 10px 20px;
 }
 .login {
-  height: 300px;
   background-color: khaki;
   display: flex;
   align-items: center;
@@ -133,6 +132,18 @@
   cursor: pointer;
   margin-top: 30px;
 }
+.signupBtn {
+  width: 100px;
+  height: 40px;
+  background-color: dodgerblue;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 30px;
+}
 .purchaseBtn {
   width: 100px;
   height: 40px;
@@ -157,6 +168,21 @@
   background-color: white;
   box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.2);
   font-size: 1.5rem;
+  border-radius: 5px;
+}
+.signup-box {
+  width: 450px;
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-left: 30px;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.2);
+  font-size: 1.3rem;
   border-radius: 5px;
 }
 .low-box {
