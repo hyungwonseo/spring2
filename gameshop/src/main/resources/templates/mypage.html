@@ -21,7 +21,33 @@
       <div><a href="login.html">LOGIN</a></div>
       <div><a href="cart.html">CART</a></div>
     </div>
-    <div class="mypage"></div>
+    <div class="mypage">
+      <div class="admin_page hidden">
+        <h3>관리자 페이지</h3>
+        <label for="dropdown">구매정보 : </label>
+        <select id="dropdown">
+          <option value="all" selected>ALL</option>
+          <option value="userId">User ID</option>
+        </select>
+        <input type="text" id="userIdInput" />
+        <div class="pageSubmitBtn">Submit</div>
+      </div>   
+      <div class="user_page hidden">  
+        <h3>유저 페이지</h3>      
+      </div>   
+      <table class="purchase-table">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>게임ID</th>
+            <th>구매게임</th>
+            <th>구매유저</th>
+            <th>구매날짜</th>
+          </tr>
+        </thead>
+        <tbody class="purchase-body"></tbody>
+      </table>
+    </div>
     <div class="footer">
       <h3>FOOTER</h3>
     </div>

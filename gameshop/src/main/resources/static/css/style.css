@@ -158,7 +158,24 @@
   margin: 50px;
   display: inline-block;
 }
-.loginBtn:hover,.logoutBtn:hover,.purchaseBtn:hover,.cartBtn:hover {
+.pageSubmitBtn {
+  width: 100px;
+  height: 40px;
+  background-color: dodgerblue;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  line-height: 35px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px;
+  display: inline-block;
+}
+.loginBtn:hover,
+.logoutBtn:hover,
+.purchaseBtn:hover,
+.cartBtn:hover,
+.pageSubmitBtn:hover {
   background-color: lightblue;
   color: dodgerblue;
 }
@@ -209,21 +226,21 @@
   background-color: khaki;
   padding: 20px;
 }
-.cart-table {
+.cart-table, .purchase-table {
   width: 100%;
   border-collapse: collapse;
   border-radius: 5px;
   overflow: hidden;
   background-color: white;
 }
-.cart-table td {
+.cart-table td, .purchase-table td {
   text-align: center;
 }
 thead {
   background-color: #27ae60;
   height: 50px;
 }
-.tr:nth-child(even) td {
+tr:nth-child(even) td {
   background-color: #eaeaed;
 }
 .imgtd {
@@ -232,10 +249,13 @@ thead {
 .totalprice {
   display: inline-block;
 }
+.mypage {
+  width: 100%;
+  background-color: khaki;
+  padding: 20px;
+}
 
 /* hidden 클래스 스타일은 파일의 제일 아래에 놓자!! */
 .hidden {
   display: none;
 }
-
-

@@ -23,29 +23,36 @@ public class PurchaseController {
     }
 
     @PostMapping("/products/purchaselist")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public List<Purchase> savePurchaseList(@RequestBody List<Purchase> purchaseList) {
         return purchaseService.savePurchaseList(purchaseList);
     }
 
     @GetMapping("/products/purchase")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public List<Purchase> getAllPurchases() {
         return purchaseService.getAllPurchases();
     }
 
     @GetMapping("/products/purchase/id/{userId}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public List<Purchase> getPurchaseListByUser(@PathVariable String userId) {
         return purchaseService.getPurchaseListByUser(userId);
     }
 
     @GetMapping("/products/purchase/name/{userName}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<List<Purchase>> getPurchaseListByUserName(
             @PathVariable String userName) {
         return new ResponseEntity<>(purchaseService.getPurchaseListByUserName(userName),
                 HttpStatus.OK);
     }
 
+    @GetMapping("/products/purchase/current")
+    public List<Purchase> getPurchaseListByCurrentUser() {
+        return purchaseService.getPurchaseListByCurrentUser();
+    }
 }
+
 
 
 
