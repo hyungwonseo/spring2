@@ -39,4 +39,9 @@ public class ViewController {
     public String mypage() {
         return "mypage";
     }
+
+    @GetMapping("/gameshop/video.html")
+    public String video() {
+        return "video";
+    }
 }
