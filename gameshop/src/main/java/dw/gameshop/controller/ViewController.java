@@ -44,4 +44,9 @@ public class ViewController {
     public String video() {
         return "video";
     }
+
+    @GetMapping("/gameshop/upload.html")
+    public String upload() {
+        return "upload";
+    }
 }
