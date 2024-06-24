@@ -44,10 +44,6 @@ public class GameShopService {
         }
     }
 
-//    public User saveUser(User user) {
-//        return userRepository.save(user);
-//    }
-
     //제일 비싼 게임의 정보
     public Game getGameWithMaxPrice() {
         List<Game> games = gameShopRepository.findAll();

@@ -35,12 +35,6 @@ public class GameShopController {
                 HttpStatus.OK);
     }
 
-//    @PostMapping("/products/user")
-//    public ResponseEntity<User> saveUser(@RequestBody User user) {
-//        return new ResponseEntity<>(gameShopService.saveUser(user),
-//                HttpStatus.OK);
-//    }
-
     @GetMapping("/products/maxprice")
     public ResponseEntity<Game> getGameWithMaxPrice() {
         return new ResponseEntity<>(gameShopService.getGameWithMaxPrice(),
