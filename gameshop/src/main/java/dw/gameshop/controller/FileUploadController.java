@@ -1,9 +1,11 @@
 package dw.gameshop.controller;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -27,7 +29,7 @@ public class FileUploadController {
                 Files.createDirectories(uploadPath);
             }
             // 파일이름을 저장위치와 조합
-            Path copyLocation = uploadPath.resolve(file.getOriginalFilename());
+            Path copyLocation = uploadPath.resolve(file.getOriginalFilename()).normalize();
             // 파일저장
             Files.copy(file.getInputStream(), copyLocation);
             return "File uploaded successfully: " + file.getOriginalFilename();
@@ -37,6 +39,25 @@ public class FileUploadController {
         } catch (IOException e) {
             e.printStackTrace();
             return "Failed to upload file";
+        }
+    }
+
+    @GetMapping("/download/{filename}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String filename) {
+        try {
+            Path filePath = Paths.get(uploadDir).resolve(filename).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION,
+                                "attachment; filename=\"" + resource.getFilename() + "\"")
+                        .body(resource);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
         }
     }
 }
