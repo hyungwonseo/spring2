@@ -21,7 +21,14 @@ public class FileUploadController {
     @PostMapping("/upload")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
         try {
-            Path copyLocation = Paths.get(uploadDir + File.separator + file.getOriginalFilename());
+            // 업로드 폴더확인, 없으면 생성
+            Path uploadPath = Paths.get(uploadDir);
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+            // 파일이름을 저장위치와 조합
+            Path copyLocation = uploadPath.resolve(file.getOriginalFilename());
+            // 파일저장
             Files.copy(file.getInputStream(), copyLocation);
             return "File uploaded successfully: " + file.getOriginalFilename();
         } catch (FileAlreadyExistsException e) {

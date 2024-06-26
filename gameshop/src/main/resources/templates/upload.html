@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.2/dist/axios.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -39,13 +40,9 @@
         const formData = new FormData();
         formData.append('file', file);
 
-        fetch('/upload', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            message.textContent = data;
+        axios.post('/upload', formData, {withCredentials: true})
+        .then(response => {
+            message.textContent = response.data;
             const image = document.getElementById('image');
             const img = document.createElement('img');
             img.src = "http://localhost:8080/uploads/" + file.name;
@@ -73,13 +70,9 @@
         const formData = new FormData();
         formData.append('file', file);
 
-        fetch('/upload/db', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text())
-        .then(data => {
-            message.textContent = data;
+        axios.post('/upload/db', formData, {withCredentials: true})
+        .then(response => {
+            message.textContent = response.data;
             loadImageFromApi(file.name);
         })
         .catch(error => {
@@ -93,16 +86,10 @@
         const apiUrl = `/api/file/${filename}`;
 
         // Fetch API를 사용하여 이미지 데이터 요청
-        fetch(apiUrl)
+        axios.get(apiUrl, {withCredentials: true, responseType: 'blob'})
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.blob(); // 이미지 데이터를 Blob 형식(바이너리 데이터)으로 받아옴
-        })
-        .then(blob => {
             // Blob 데이터를 URL로 변환하여 이미지로 표시
-            const imageUrl = URL.createObjectURL(blob);
+            const imageUrl = URL.createObjectURL(response.data);
             const imgElement = document.createElement('img');
             imgElement.src = imageUrl;
 
