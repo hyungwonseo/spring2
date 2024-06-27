@@ -40,6 +40,7 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/img/**"),
                                 new AntPathRequestMatcher("/mp4/**")
                         ).permitAll()
+                        .requestMatchers("/uploads/**").denyAll()
                         .anyRequest().authenticated())
                 .formLogin(form->form.loginPage("/login").defaultSuccessUrl("/articles"))
                 .sessionManagement(session -> session
