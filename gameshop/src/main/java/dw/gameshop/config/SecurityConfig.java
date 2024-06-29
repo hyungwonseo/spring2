@@ -31,10 +31,11 @@ public class SecurityConfig {
                 .authorizeRequests(auth -> auth
                         .requestMatchers(
                                 new AntPathRequestMatcher("/api/products/**"),
+                                new AntPathRequestMatcher("/api/board/**"),
                                 new AntPathRequestMatcher("/api/user/login"),
                                 new AntPathRequestMatcher("/api/user/signup"),
-                                new AntPathRequestMatcher("/login"),
                                 new AntPathRequestMatcher("/gameshop/**"),
+                                new AntPathRequestMatcher("/*"),
                                 new AntPathRequestMatcher("/css/**"),
                                 new AntPathRequestMatcher("/js/**"),
                                 new AntPathRequestMatcher("/img/**"),

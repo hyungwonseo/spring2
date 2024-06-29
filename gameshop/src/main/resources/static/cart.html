@@ -17,15 +17,31 @@
     </div>
     <div class="menu">
       <div><a href="index.html">HOME</a></div>
+      <div><a href="board.html">BOARD</a></div>
       <div><a href="mypage.html">MY PAGE</a></div>
       <div><a href="login.html">LOGIN</a></div>
       <div><a href="cart.html">CART</a></div>
     </div>
-    <div class="content"></div>
-    <div class="footer">
-      <h3>FOOTER</h3>
+    <div class="cart">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>게임</th>
+            <th>타이틀</th>
+            <th>장르</th>
+            <th>가격</th>
+              <th>삭제</th>
+          </tr>
+        </thead>
+          <tbody class="cart-body"></tbody>
+        </table>
+        <div class="purchaseBtn">구매하기</div>
+        <div class="totalprice"></div>
+      </div>
+      <div class="footer">
+        <h3>FOOTER</h3>
+      </div>
     </div>
-  </div>
-  <script src="/js/index.js"></script>
-</body>
+    <script src="/js/cart.js"></script>
+  </body>
 </html>
