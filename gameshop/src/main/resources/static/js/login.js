@@ -1,6 +1,7 @@
-const urlLogin = "http://localhost:8080/user/login";
-const urlLogout = "http://localhost:8080/user/logout";
-const urlSignup = "http://localhost:8080/user/signup";
+const urlLogin = "/api/user/login";
+const urlLogout = "/api/user/logout";
+const urlSignup = "/api/user/signup";
+const urlSession = "/api/user/current";
 let userId = "";
 let password = "";
 let userIdSignup = "";
@@ -91,7 +92,7 @@ function signup() {
 
 function sessionCurrent() {
   axios
-  .get("http://localhost:8080/user/current", {withCredentials: true})
+  .get(urlSession, {withCredentials: true})
   .then((response)=>{
     console.log("데이터:", response);
     if (response.status == 200) {

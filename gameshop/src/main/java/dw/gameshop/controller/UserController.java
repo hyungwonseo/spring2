@@ -18,7 +18,7 @@ import org.springframework.security.web.context.HttpSessionSecurityContextReposi
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     private UserService userService;
     private UserDetailService userDetailService;
@@ -32,13 +32,13 @@ public class UserController {
         this.httpServletRequest = httpServletRequest;
     }
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public ResponseEntity<String> signUp(@RequestBody UserDto userDto) {
         return new ResponseEntity<>(userService.saveUser(userDto),
                 HttpStatus.CREATED);
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserDto userDto,
                                         HttpServletRequest request) {
         Authentication authentication = authenticationManager.authenticate(
@@ -63,7 +63,7 @@ public class UserController {
         return "You have been logged out.";
     }
 
-    @GetMapping("current")
+    @GetMapping("/current")
     public SessionDto getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {

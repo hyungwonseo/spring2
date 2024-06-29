@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/products";
+const url = "/api/products";
 
 axios.get(url)
 .then((response)=>{

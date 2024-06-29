@@ -1,13 +1,14 @@
-const urlPurchaseAll = "http://localhost:8080/api/products/purchase";
-const urlPurchaseById = "http://localhost:8080/api/products/purchase/id/";
-const urlPurchaseByCurrent = "http://localhost:8080/api/products/purchase/current";
+const urlPurchaseAll = "/api/products/purchase";
+const urlPurchaseById = "/api/products/purchase/id/";
+const urlPurchaseByCurrent = "/api/products/purchase/current";
+const urlSession = "/api/user/current";
 
 const adminPage = document.querySelector(".admin_page");
 const userPage = document.querySelector(".user_page");
 
 function sessionCurrent() {
   axios
-  .get("http://localhost:8080/user/current", {withCredentials: true})
+  .get(urlSession, {withCredentials: true})
   .then((response)=>{
     console.log("데이터:", response);
     if (response.status == 200) {

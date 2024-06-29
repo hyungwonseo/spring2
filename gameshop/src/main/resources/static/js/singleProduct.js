@@ -2,7 +2,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
 console.log("Game ID: ", id);
 
-const url = "http://localhost:8080/products/" + id;
+const url = "/api/products/" + id;
+const urlSession = "/api/user/current";
 
 axios
 .get(url)
@@ -61,7 +62,7 @@ function displaySingleProduct(data) {
 
 function sessionCurrent(data) {
   axios
-  .get("http://localhost:8080/user/current", {withCredentials: true})
+  .get(urlSession, {withCredentials: true})
   .then((response)=>{
     console.log("데이터:", response.data);
     if (response.status == 200) {

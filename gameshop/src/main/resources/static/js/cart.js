@@ -1,8 +1,9 @@
-const url = "http://localhost:8080/api/products/purchaselist";
+const url = "/api/products/purchaselist";
+const urlSession = "/api/user/current";
 
 function sessionCurrent() {
   axios
-  .get("http://localhost:8080/user/current", {withCredentials: true})
+  .get(urlSession, {withCredentials: true})
   .then((response)=>{
     console.log("데이터:", response.data);
     if (response.status == 200) {

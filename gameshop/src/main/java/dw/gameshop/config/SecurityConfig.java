@@ -30,9 +30,9 @@ public class SecurityConfig {
         return http
                 .authorizeRequests(auth -> auth
                         .requestMatchers(
-                                new AntPathRequestMatcher("/products/**"),
-                                new AntPathRequestMatcher("/user/login"),
-                                new AntPathRequestMatcher("/user/signup"),
+                                new AntPathRequestMatcher("/api/products/**"),
+                                new AntPathRequestMatcher("/api/user/login"),
+                                new AntPathRequestMatcher("/api/user/signup"),
                                 new AntPathRequestMatcher("/login"),
                                 new AntPathRequestMatcher("/gameshop/**"),
                                 new AntPathRequestMatcher("/css/**"),
