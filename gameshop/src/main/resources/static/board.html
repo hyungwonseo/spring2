@@ -32,6 +32,7 @@
       <div class="board">
         <div class="board-title">
           <h1>게시판</h1>
+          <div class="writeBtn">글쓰기</div>
         </div>
         <table class="board-table">
           <thead>
@@ -58,6 +59,20 @@
       <div class="footer">
         <h3>FOOTER</h3>
       </div>
+      <div class="modal hidden">
+        <div>제 목</div>
+        <input class="modal-title" />
+        <div>작성자</div>
+        <div class="modal-writer"></div>
+        <div>내 용</div>
+        <textarea class="modal-text"></textarea>
+        <div></div>
+        <div>
+          <span class="modal-save-btn">SAVE</span>
+          <span class="modal-close-btn">CLOSE</span>
+        </div>
+      </div>
+      <div class="backdrop hidden"></div>
     </div>
     <script src="/js/board.js"></script>
   </body>

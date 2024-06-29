@@ -1,10 +1,33 @@
 const urlBoard = "/api/board";
 const urlDeleteBoard = "/api/board/delete";
+const urlSession = "/api/user/current";
 
 let dataList = [];
 let pageCurrent = 1;
 let pageEnd = 1;
 const itemsPerPage = 5;
+let currentUser = {};
+
+function sessionCurrent() {
+  axios
+    .get(urlSession, { withCredentials: true })
+    .then((response) => {
+      console.log("데이터:", response.data);
+      if (response.status == 200) {
+        currentUser = response.data;
+        const modal = document.querySelector(".modal");
+        const backdrop = document.querySelector(".backdrop");
+        modal.classList.remove("hidden");
+        backdrop.classList.remove("hidden");
+        document.querySelector(".modal-writer").textContent =
+          currentUser.userId;
+      }
+    })
+    .catch((error) => {
+      console.log("에러 발생:", error);
+      alert("로그인해주세요.");
+    });
+}
 
 function getBoard() {
   axios
@@ -68,31 +91,6 @@ function displayBoardHead(page) {
         tbody.appendChild(tr);
       }
     }
-    // data.forEach((d, index) => {
-    //   // 태그 요소 생성
-    //   const tr = document.createElement("tr");
-    //   const id = document.createElement("td");
-    //   const title = document.createElement("td");
-    //   const writer = document.createElement("td");
-    //   const dTime = document.createElement("td");
-    //   // 클래스이름 생성
-
-    //   // 태그속성추가
-    //   id.textContent = (page - 1) * itemsPerPage + index + 1;
-    //   title.textContent = d.title;
-    //   writer.textContent = d.author.userId;
-    //   dTime.textContent = formatPurchaseDate(d.modifiedDate);
-    //   // appendChild 부모자식 위치 설정
-    //   tr.appendChild(id);
-    //   tr.appendChild(title);
-    //   tr.appendChild(writer);
-    //   tr.appendChild(dTime);
-    //   tbody.appendChild(tr);
-
-    //   tr.addEventListener("click", () => {
-    //     displayBoardText(d, id.textContent, page);
-    //   });
-    // });
   }
 }
 
@@ -120,7 +118,7 @@ function displayBoardText(data, idValue, pageNum) {
   div.appendChild(dTime);
   // 본문
   const content = document.querySelector(".item-text-body");
-  content.style.height = `${50 * (itemsPerPage - 1)}px`;
+  content.style.minHeight = `${50 * (itemsPerPage - 1)}px`;
   content.innerHTML = data.content;
 }
 
@@ -181,6 +179,51 @@ document.querySelector(".board-page-right").addEventListener("click", () => {
 });
 document.querySelector(".item-text-back-btn").addEventListener("click", () => {
   displayBoardHead(pageCurrent);
+});
+document.querySelector(".writeBtn").addEventListener("click", () => {
+  sessionCurrent();
+});
+document.querySelector(".modal-save-btn").addEventListener("click", () => {
+  const title = document.querySelector(".modal-title").value;
+  const content = document.querySelector(".modal-text").value;
+  const regex = /^\s*$/;
+  if (regex.test(title) || regex.test(content)) {
+    alert("제목 또는 본문에 글을 작성해주세요");
+    return;
+  }
+  const data = {
+    id: 0,
+    title: title,
+    content: content,
+    author: {
+      userId: currentUser.userId,
+      authority: {
+        authorityName: currentUser.authority[0].authority,
+      },
+    },
+  };
+  axios
+    .post(urlBoard, data, { withCredentials: true })
+    .then((response) => {
+      console.log("데이터:", response.data);
+      alert("글을 성공적으로 저장하였습니다.");
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log("에러 발생: ", error);
+    });
+});
+document.querySelector(".modal-close-btn").addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const backdrop = document.querySelector(".backdrop");
+  modal.classList.add("hidden");
+  backdrop.classList.add("hidden");
+});
+document.querySelector(".backdrop").addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const backdrop = document.querySelector(".backdrop");
+  modal.classList.add("hidden");
+  backdrop.classList.add("hidden");
 });
 
 getBoard();
