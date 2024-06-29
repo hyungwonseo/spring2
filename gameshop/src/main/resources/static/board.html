@@ -10,6 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.7.2/dist/axios.min.js"></script>
   </head>
@@ -25,11 +29,36 @@
         <div><a href="login.html">LOGIN</a></div>
         <div><a href="cart.html">CART</a></div>
       </div>
-      <div class="board"></div>
+      <div class="board">
+        <div class="board-title">
+          <h1>게시판</h1>
+        </div>
+        <table class="board-table">
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th class="col">제목</th>
+              <th>작성자</th>
+              <th>날짜</th>
+            </tr>
+          </thead>
+          <tbody class="item-head"></tbody>
+        </table>
+        <div class="item-text hidden">
+          <div class="item-text-head"></div>
+          <div class="item-text-body"></div>
+          <div class="item-text-back-btn">BACK</div>
+        </div>
+        <div class="board-page">
+          <div class="board-page-left">previous</div>
+          <div class="board-page-num"></div>
+          <div class="board-page-right">next</div>
+        </div>
+      </div>
       <div class="footer">
         <h3>FOOTER</h3>
       </div>
     </div>
-    <script src="/js/singleProduct.js"></script>
+    <script src="/js/board.js"></script>
   </body>
 </html>
