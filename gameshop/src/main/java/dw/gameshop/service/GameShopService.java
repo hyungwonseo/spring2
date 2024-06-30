@@ -34,7 +34,7 @@ public class GameShopService {
         if(gameOptional.isPresent()) {
             return gameOptional.get();
         }else {
-            throw new ResourceNotFoundException("Game", "ID", id);
+            throw new ResourceNotFoundException("해당 Game이 없습니다. ID : " + id);
         }
     }
 
@@ -50,7 +50,7 @@ public class GameShopService {
             gameShopRepository.save(temp);
             return temp;
         }else {
-            throw new ResourceNotFoundException("Game", "ID", id);
+            throw new ResourceNotFoundException("해당 Game이 없습니다. ID : " + id);
         }
     }
 
@@ -63,7 +63,7 @@ public class GameShopService {
         List<Game> games = gameShopRepository.findAll();
         // 람다식이 아닌 일반 자바코드 사용 예
 //        if (games.size() <= 0) {
-//            throw new ResourceNotFoundException("Max Price", " ", " ");
+//            throw new RuntimeException();
 //        }
 //        Game max = games.get(0);
 //        for (int i=0; i< games.size()-1; i++) {
@@ -77,7 +77,7 @@ public class GameShopService {
 //                .sorted(Comparator.comparingInt(Game::getPrice)
 //                .reversed())
 //                .findFirst()
-//                .orElseThrow(() -> new ResourceNotFoundException("Max Price", " ", " "));
+//                .orElseThrow(() -> new RuntimeException());
         // JPQL 사용 예
         return gameShopRepository.getGameWithMaxPrice();
     }

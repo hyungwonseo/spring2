@@ -40,6 +40,6 @@ public class BoardService {
                     boardRepository.save(board);
                     return "successfully deleted";
                 })
-                .orElseThrow(() -> new ResourceNotFoundException("게시판 글이 없습니다.", "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException("게시판 글이 없습니다. ID : " + id));
     }
 }

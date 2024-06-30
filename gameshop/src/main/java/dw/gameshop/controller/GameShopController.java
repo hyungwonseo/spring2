@@ -1,5 +1,7 @@
 package dw.gameshop.controller;
 
+import dw.gameshop.dto.BaseResponse;
+import dw.gameshop.enumstatus.ResultCode;
 import dw.gameshop.model.Game;
 import dw.gameshop.model.User;
 import dw.gameshop.service.GameShopService;
@@ -19,40 +21,58 @@ public class GameShopController {
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<Game>> getAllGames() {
-        return new ResponseEntity<>(gameShopService.getAllGames(),
-                HttpStatus.OK);
+    public ResponseEntity<BaseResponse<List<Game>>> getAllGames() {
+        return new ResponseEntity<>(
+                new BaseResponse(ResultCode.SUCCESS.name(),
+                        gameShopService.getAllGames(),
+                        ResultCode.SUCCESS.getMsg())
+                , HttpStatus.OK);
     }
 
     @GetMapping("/products/{id}")
-    public ResponseEntity<Game> getGameById(@PathVariable long id) {
-        return new ResponseEntity<>(gameShopService.getGameById(id),
-                HttpStatus.OK);
+    public ResponseEntity<BaseResponse<Game>> getGameById(@PathVariable long id) {
+        return new ResponseEntity<>(
+                new BaseResponse(ResultCode.SUCCESS.name(),
+                        gameShopService.getGameById(id),
+                        ResultCode.SUCCESS.getMsg())
+                , HttpStatus.OK);
     }
 
     @PutMapping("/products/{id}")
-    public ResponseEntity<Game> updateGameById(@PathVariable long id,
+    public ResponseEntity<BaseResponse<Game>> updateGameById(@PathVariable long id,
                                @RequestBody Game game) {
-        return new ResponseEntity<>(gameShopService.updateGameById(id, game),
-                HttpStatus.OK);
+        return new ResponseEntity<>(
+                new BaseResponse(ResultCode.SUCCESS.name(),
+                        gameShopService.updateGameById(id, game),
+                        ResultCode.SUCCESS.getMsg())
+                , HttpStatus.OK);
     }
 
     @PostMapping("/products/user")
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
-        return new ResponseEntity<>(gameShopService.saveUser(user),
-                HttpStatus.OK);
+    public ResponseEntity<BaseResponse<User>> saveUser(@RequestBody User user) {
+        return new ResponseEntity<>(
+                new BaseResponse(ResultCode.SUCCESS.name(),
+                        gameShopService.saveUser(user),
+                        ResultCode.SUCCESS.getMsg())
+                , HttpStatus.OK);
     }
 
     @GetMapping("/products/maxprice")
-    public ResponseEntity<Game> getGameWithMaxPrice() {
-        return new ResponseEntity<>(gameShopService.getGameWithMaxPrice(),
-                HttpStatus.OK);
+    public ResponseEntity<BaseResponse<Game>> getGameWithMaxPrice() {
+        return new ResponseEntity<>(
+                new BaseResponse(ResultCode.SUCCESS.name(),
+                        gameShopService.getGameWithMaxPrice(),
+                        ResultCode.SUCCESS.getMsg())
+                , HttpStatus.OK);
     }
 
     @GetMapping("/products/maxpricetop3")
-    public ResponseEntity<List<Game>> getGameWithMaxPriceTop3() {
-        return new ResponseEntity<>(gameShopService.getGameWithMaxPriceTop3(),
-                HttpStatus.OK);
+    public ResponseEntity<BaseResponse<List<Game>>> getGameWithMaxPriceTop3() {
+        return new ResponseEntity<>(
+                new BaseResponse(ResultCode.SUCCESS.name(),
+                        gameShopService.getGameWithMaxPriceTop3(),
+                        ResultCode.SUCCESS.getMsg())
+                , HttpStatus.OK);
     }
 }
 

@@ -8,68 +8,70 @@ const userPage = document.querySelector(".user_page");
 
 function sessionCurrent() {
   axios
-  .get(urlSession, {withCredentials: true})
-  .then((response)=>{
-    console.log("데이터:", response);
-    if (response.status == 200) {
-      console.log("세션 유지");
-      const userId = response.data.userId;
-      const authority = response.data.authority[0].authority;
-      if (authority == "ROLE_ADMIN") {
-        adminPage.classList.remove("hidden");
-        userPage.classList.add("hidden");
-      }else if (authority == "ROLE_USER") {
-        adminPage.classList.add("hidden");
-        userPage.classList.remove("hidden");
-        axios
-        .get(urlPurchaseByCurrent, {withCredentials: true})
-        .then((response)=>{
-          console.log("데이터:", response);
-          displayPurchaseInfo(response.data);
-        })
-        .catch((error)=>{
-          console.log("에러 발생:", error);
-        })
-      }else {
-        console.log("에러! 여기오면 안되는데..")
-      }
-
-      document.querySelector(".pageSubmitBtn").addEventListener("click", ()=>{
-        const dropdown = document.querySelector('#dropdown');
-        const selectedUserId = document.querySelector("#userIdInput").value;
-        let url = "";
-        if (dropdown.value == "userId") {
-          if (selectedUserId == "" || selectedUserId == null) {
-            alert("유저 아이디를 입력해주세요.");
-            return;
-          }else {
-            url = urlPurchaseById + selectedUserId;
-          }          
-        }else {
-          url = urlPurchaseAll;
+    .get(urlSession, { withCredentials: true })
+    .then((response) => {
+      console.log("데이터:", response.data);
+      if (response.data.resultCode == "SUCCESS") {
+        console.log("세션 유지");
+        const userId = response.data.data.userId;
+        const authority = response.data.data.authority[0].authority;
+        if (authority == "ROLE_ADMIN") {
+          adminPage.classList.remove("hidden");
+          userPage.classList.add("hidden");
+        } else if (authority == "ROLE_USER") {
+          adminPage.classList.add("hidden");
+          userPage.classList.remove("hidden");
+          axios
+            .get(urlPurchaseByCurrent, { withCredentials: true })
+            .then((response) => {
+              console.log("데이터:", response.data);
+              displayPurchaseInfo(response.data.data);
+            })
+            .catch((error) => {
+              console.log("에러 발생:", error.response.data);
+            });
+        } else {
+          console.log("에러! 여기오면 안되는데..");
         }
-        axios
-        .get(url, {withCredentials: true})
-        .then((response)=>{
-          console.log("데이터:", response);
-          displayPurchaseInfo(response.data);
-        })
-        .catch((error)=>{
-          console.log("에러 발생:", error);
-          alert("입력하신 유저 아이디는 존재하지 않습니다.");
-        })
-      })
-    }
-  })
-  .catch((error)=>{
-    console.log("에러 발생:", error);
-    alert("로그인해주세요.");
-  })
+
+        document
+          .querySelector(".pageSubmitBtn")
+          .addEventListener("click", () => {
+            const dropdown = document.querySelector("#dropdown");
+            const selectedUserId = document.querySelector("#userIdInput").value;
+            let url = "";
+            if (dropdown.value == "userId") {
+              if (selectedUserId == "" || selectedUserId == null) {
+                alert("유저 아이디를 입력해주세요.");
+                return;
+              } else {
+                url = urlPurchaseById + selectedUserId;
+              }
+            } else {
+              url = urlPurchaseAll;
+            }
+            axios
+              .get(url, { withCredentials: true })
+              .then((response) => {
+                console.log("데이터:", response.data);
+                displayPurchaseInfo(response.data.data);
+              })
+              .catch((error) => {
+                console.log("에러 발생:", error.response.data);
+                alert("입력하신 유저 아이디는 존재하지 않습니다.");
+              });
+          });
+      }
+    })
+    .catch((error) => {
+      console.log("에러 발생:", error.response.data);
+      alert("로그인해주세요.");
+    });
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  const dropdown = document.querySelector('#dropdown');
-  dropdown.addEventListener('change', (event) => {
+document.addEventListener("DOMContentLoaded", (event) => {
+  const dropdown = document.querySelector("#dropdown");
+  dropdown.addEventListener("change", (event) => {
     document.querySelector("#userIdInput").value = "";
   });
 });
@@ -79,7 +81,7 @@ function displayPurchaseInfo(games) {
   const tbody = document.querySelector(".purchase-body");
   // 테이블 바디 초기화
   tbody.innerHTML = "";
-  games.forEach((data, index)=>{
+  games.forEach((data, index) => {
     // 태그 요소 생성
     const tr = document.createElement("tr");
     const num = document.createElement("td");
@@ -107,19 +109,19 @@ function displayPurchaseInfo(games) {
     } else {
       adminPage.appendChild(table);
     }
-  })
+  });
 }
 
 function formatPurchaseDate(purchaseTime) {
   const date = new Date(purchaseTime);
 
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더함
-  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 1을 더함
+  const day = String(date.getDate()).padStart(2, "0");
 
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  const seconds = String(date.getSeconds()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }

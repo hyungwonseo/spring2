@@ -3,44 +3,45 @@ const urlSession = "/api/user/current";
 
 function sessionCurrent() {
   axios
-  .get(urlSession, {withCredentials: true})
-  .then((response)=>{
-    console.log("데이터:", response.data);
-    if (response.status == 200) {
-      const userId = response.data.userId;
-      const authority = response.data.authority[0].authority;
-      let cartItems = JSON.parse(localStorage.getItem(userId));
+    .get(urlSession, { withCredentials: true })
+    .then((response) => {
+      console.log("데이터:", response.data);
+      if (response.data.resultCode == "SUCCESS") {
+        const userId = response.data.data.userId;
+        const authority = response.data.data.authority[0].authority;
+        let cartItems = JSON.parse(localStorage.getItem(userId));
         if (cartItems && cartItems.length > 0) {
           displayCart(cartItems, userId);
-        const data = cartItems.map((game)=>{
-          // Purchase객체를 만들어서 리턴
+          const data = cartItems.map((game) => {
+            // Purchase객체를 만들어서 리턴
             return {
               game: game,
               user: { userId: userId, authority: { authorityName: authority } },
             };
           });
-        document.querySelector(".purchaseBtn")
-          .addEventListener("click", ()=>{
-            if (confirm("구매하시겠습니까?")) {
-              axios
-              .post(url, data, {withCredentials: true})
-              .then((response)=>{
-                console.log("데이터:", response.data);
-                localStorage.removeItem(userId);
-                window.location.reload();
-              })
-              .catch((error)=>{
-                console.log("에러 발생:", error);
-              });
-            }
-        });
+          document
+            .querySelector(".purchaseBtn")
+            .addEventListener("click", () => {
+              if (confirm("구매하시겠습니까?")) {
+                axios
+                  .post(url, data, { withCredentials: true })
+                  .then((response) => {
+                    console.log("데이터:", response.data);
+                    localStorage.removeItem(userId);
+                    window.location.reload();
+                  })
+                  .catch((error) => {
+                    console.log("에러 발생:", error.response.data);
+                  });
+              }
+            });
+        }
       }
-    }
-  })
-  .catch((error)=>{
-    console.log("에러 발생:", error);
-    alert("로그인해주세요.");
-  })
+    })
+    .catch((error) => {
+      console.log("에러 발생:", error.response.data);
+      alert("로그인해주세요.");
+    });
 }
 
 function displayCart(games, userId) {

@@ -49,7 +49,7 @@ public class PurchaseService {
         // 유저아이디로 유저객체 찾기
         Optional<User> userOptional = userRepository.findByUserId(userId);
         if (userOptional.isEmpty()) {
-            throw new ResourceNotFoundException("User", "ID", userId);
+            throw new ResourceNotFoundException("해당 유저가 없습니다. ID : " + userId);
         }
         return purchaseRepository.findByUser(userOptional.get());
     }
@@ -59,7 +59,7 @@ public class PurchaseService {
         // 유저이름으로 유저객체 찾기
         Optional<User> userOptional = userRepository.findByUserName(userName);
         if (userOptional.isEmpty()) {
-            throw new ResourceNotFoundException("User", "Name", userName);
+            throw new ResourceNotFoundException("해당 유저 이름이 없습니다. : " + userName);
         }
         return purchaseRepository.findByUser(userOptional.get());
     }
@@ -73,7 +73,7 @@ public class PurchaseService {
         String userId = authentication.getName();
         Optional<User> userOptional = userRepository.findByUserId(userId);
         if (userOptional.isEmpty()) {
-            throw new ResourceNotFoundException("User", "ID", userId);
+            throw new ResourceNotFoundException("해당 유저가 없습니다. ID : " + userId);
         }
         return purchaseRepository.findByUser(userOptional.get());
     }

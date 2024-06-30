@@ -1,19 +1,20 @@
 const url = "/api/products";
 
-axios.get(url)
-.then((response)=>{
-  console.log("응답 Response: ", response);
-  displayProducts(response.data);
-})
-.catch((error)=>{
-  console.log("에러 발생: ", error);
-});
+axios
+  .get(url)
+  .then((response) => {
+    console.log("응답 Response: ", response);
+    displayProducts(response.data.data);
+  })
+  .catch((error) => {
+    console.log("에러 발생: ", error.response.data);
+  });
 
 function displayProducts(gameData) {
   console.log(gameData.length);
   if (gameData.length > 0) {
     const content = document.querySelector(".content");
-    gameData.forEach((data)=>{
+    gameData.forEach((data) => {
       const game = document.createElement("div");
       game.classList.add("game");
       const img = document.createElement("img");
@@ -29,10 +30,10 @@ function displayProducts(gameData) {
       game.appendChild(title);
       game.appendChild(genre);
       game.appendChild(price);
-      game.addEventListener("click", ()=>{
+      game.addEventListener("click", () => {
         window.location.href = "singleProduct.html?id=" + data.id;
-      })
+      });
       content.appendChild(game);
-    })
+    });
   }
 }

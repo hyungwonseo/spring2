@@ -1,6 +1,8 @@
 package dw.gameshop.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dw.gameshop.dto.BaseResponse;
+import dw.gameshop.enumstatus.ResultCode;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,10 +26,10 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler {
         // 권한이 없는 사용자가 보호된 리소스에 접근했을 때 호출됨
 
         // 응답으로 전송할 JSON 데이터 생성
-        Map<String, Object> responseData = new HashMap<>();
-        responseData.put("status", HttpStatus.FORBIDDEN.value());
-        responseData.put("error", "Forbidden");
-        responseData.put("message", "Access denied");
+        BaseResponse<String> responseData = new BaseResponse<>();
+        responseData.setResultCode(ResultCode.ERROR.name());
+        responseData.setData("Forbidden : Access denied.");
+        responseData.setMessage("권한이 없습니다.");
 
         // JSON 데이터를 문자열로 변환
         ObjectMapper mapper = new ObjectMapper();

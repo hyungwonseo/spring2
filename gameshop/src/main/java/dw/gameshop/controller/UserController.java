@@ -1,7 +1,9 @@
 package dw.gameshop.controller;
 
+import dw.gameshop.dto.BaseResponse;
 import dw.gameshop.dto.SessionDto;
 import dw.gameshop.dto.UserDto;
+import dw.gameshop.enumstatus.ResultCode;
 import dw.gameshop.service.UserDetailService;
 import dw.gameshop.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,13 +35,16 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody UserDto userDto) {
-        return new ResponseEntity<>(userService.saveUser(userDto),
-                HttpStatus.CREATED);
+    public ResponseEntity<BaseResponse<String>> signUp(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(
+                new BaseResponse(ResultCode.SUCCESS.name(),
+                        userService.saveUser(userDto),
+                        ResultCode.SUCCESS.getMsg())
+                , HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserDto userDto,
+    public ResponseEntity<BaseResponse<Void>> login(@RequestBody UserDto userDto,
                                         HttpServletRequest request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userDto.getUserId(), userDto.getPassword())
@@ -51,20 +56,28 @@ public class UserController {
         session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY,
                 SecurityContextHolder.getContext());
 
-        return ResponseEntity.ok("Success");
+        return new ResponseEntity<>(
+                new BaseResponse(ResultCode.SUCCESS.name(),
+                        null,
+                        ResultCode.SUCCESS.getMsg())
+                , HttpStatus.OK);
     }
 
     @PostMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<BaseResponse<String>> logout(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-        return "You have been logged out.";
+        return new ResponseEntity<>(
+                new BaseResponse(ResultCode.SUCCESS.name(),
+                        "You have been logged out.",
+                        ResultCode.SUCCESS.getMsg())
+                , HttpStatus.OK);
     }
 
     @GetMapping("/current")
-    public SessionDto getCurrentUser() {
+    public ResponseEntity<BaseResponse<SessionDto>> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {
             throw new IllegalStateException("User is not authenticated");
@@ -72,6 +85,11 @@ public class UserController {
         SessionDto sessionDto = new SessionDto();
         sessionDto.setUserId(authentication.getName());
         sessionDto.setAuthority(authentication.getAuthorities());
-        return sessionDto;
+
+        return new ResponseEntity<>(
+                new BaseResponse(ResultCode.SUCCESS.name(),
+                        sessionDto,
+                        ResultCode.SUCCESS.getMsg())
+                , HttpStatus.OK);
     }
 }

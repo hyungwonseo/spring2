@@ -13,8 +13,8 @@ function sessionCurrent() {
     .get(urlSession, { withCredentials: true })
     .then((response) => {
       console.log("데이터:", response.data);
-      if (response.status == 200) {
-        currentUser = response.data;
+      if (response.data.resultCode == "SUCCESS") {
+        currentUser = response.data.data;
         const modal = document.querySelector(".modal");
         const backdrop = document.querySelector(".backdrop");
         modal.classList.remove("hidden");
@@ -24,7 +24,7 @@ function sessionCurrent() {
       }
     })
     .catch((error) => {
-      console.log("에러 발생:", error);
+      console.log("에러 발생:", error.response.data);
       alert("로그인해주세요.");
     });
 }
@@ -34,13 +34,13 @@ function getBoard() {
     .get(urlBoard, { withCredentials: true })
     .then((response) => {
       console.log("데이터:", response.data);
-      dataList = response.data;
+      dataList = response.data.data;
       pageEnd = Math.ceil(dataList.length / itemsPerPage);
       displayPageNum();
       displayBoardHead(1);
     })
     .catch((error) => {
-      console.log("에러 발생: ", error);
+      console.log("에러 발생: ", error.response.data);
     });
 }
 
@@ -212,7 +212,7 @@ document.querySelector(".modal-save-btn").addEventListener("click", () => {
       window.location.reload();
     })
     .catch((error) => {
-      console.log("에러 발생: ", error);
+      console.log("에러 발생: ", error.response.data);
     });
 });
 document.querySelector(".modal-close-btn").addEventListener("click", () => {
