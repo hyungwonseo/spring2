@@ -1,0 +1,1 @@
+# 이 프로젝트는 AWS Elasticbeanstalk 서비스에 배포하기 위하여 설정을 수정한 프로젝트임

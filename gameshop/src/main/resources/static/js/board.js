@@ -56,6 +56,7 @@ function displayBoardHead(page) {
     const tbody = document.querySelector(".item-head");
     tbody.classList.remove("hidden");
     document.querySelector(".item-text").classList.add("hidden");
+    document.querySelector(".item-text-back-btn").classList.add("hidden");
     tbody.innerHTML = "";
 
     for (let index = 0; index < itemsPerPage; index++) {
@@ -97,6 +98,7 @@ function displayBoardHead(page) {
 function displayBoardText(data, idValue, pageNum) {
   const div = document.querySelector(".item-text-head");
   document.querySelector(".item-text").classList.remove("hidden");
+  document.querySelector(".item-text-back-btn").classList.remove("hidden");
   document.querySelector(".item-head").classList.add("hidden");
   div.innerHTML = "";
   // 태그 요소 생성

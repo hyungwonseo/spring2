@@ -342,8 +342,10 @@
   margin: 20px auto;
   display: flex;
   justify-content: center;
+  align-items: center;
   column-gap: 20px;
   margin-bottom: 100px;
+  position: relative;
 }
 .board-page-left,
 .board-page-right {
@@ -368,7 +370,6 @@
 }
 .item-text {
   width: 100%;
-  position: relative;
 }
 .item-text .item-text-head {
   width: 100%;
@@ -383,6 +384,7 @@
 .item-text .item-text-body {
   padding: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  white-space: pre-wrap;
 }
 .item-text .item-text-body p {
   display: inline-block;
@@ -390,7 +392,6 @@
 .item-text-back-btn {
   position: absolute;
   right: 10px;
-  bottom: 10px;
   cursor: pointer;
   color: #777;
 }
