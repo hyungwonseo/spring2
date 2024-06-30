@@ -1,7 +1,6 @@
 package dw.gameshop.service;
 
 import dw.gameshop.dto.ReviewDto;
-import dw.gameshop.exception.ResourceNotFoundException;
 import dw.gameshop.model.Review;
 import dw.gameshop.repository.ReviewRepository;
 import jakarta.transaction.Transactional;
