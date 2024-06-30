@@ -1,6 +1,7 @@
 package dw.gameshop.controller;
 
 import dw.gameshop.dto.BaseResponse;
+import dw.gameshop.dto.PurchaseDto;
 import dw.gameshop.enumstatus.ResultCode;
 import dw.gameshop.model.Purchase;
 import dw.gameshop.service.PurchaseService;
@@ -19,7 +20,7 @@ public class PurchaseController {
     PurchaseService purchaseService;
 
     @PostMapping("/products/purchase")
-    public ResponseEntity<BaseResponse<Purchase>> savePurchase(@RequestBody Purchase purchase) {
+    public ResponseEntity<BaseResponse<PurchaseDto>> savePurchase(@RequestBody Purchase purchase) {
         return new ResponseEntity<>(
                 new BaseResponse(ResultCode.SUCCESS.name(),
                         purchaseService.savePurchase(purchase),
@@ -28,7 +29,7 @@ public class PurchaseController {
     }
 
     @PostMapping("/products/purchaselist")
-    public ResponseEntity<BaseResponse<List<Purchase>>> savePurchaseList(@RequestBody List<Purchase> purchaseList) {
+    public ResponseEntity<BaseResponse<List<PurchaseDto>>> savePurchaseList(@RequestBody List<Purchase> purchaseList) {
         return new ResponseEntity<>(
                 new BaseResponse(ResultCode.SUCCESS.name(),
                         purchaseService.savePurchaseList(purchaseList),
@@ -38,7 +39,7 @@ public class PurchaseController {
 
     @GetMapping("/products/purchase")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<BaseResponse<List<Purchase>>> getAllPurchases() {
+    public ResponseEntity<BaseResponse<List<PurchaseDto>>> getAllPurchases() {
         return new ResponseEntity<>(
                 new BaseResponse(ResultCode.SUCCESS.name(),
                         purchaseService.getAllPurchases(),
@@ -48,7 +49,7 @@ public class PurchaseController {
 
     @GetMapping("/products/purchase/id/{userId}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<BaseResponse<List<Purchase>>> getPurchaseListByUser(@PathVariable String userId) {
+    public ResponseEntity<BaseResponse<List<PurchaseDto>>> getPurchaseListByUser(@PathVariable String userId) {
         return new ResponseEntity<>(
                 new BaseResponse(ResultCode.SUCCESS.name(),
                         purchaseService.getPurchaseListByUser(userId),
@@ -58,7 +59,7 @@ public class PurchaseController {
 
     @GetMapping("/products/purchase/name/{userName}")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public ResponseEntity<BaseResponse<List<Purchase>>> getPurchaseListByUserName(
+    public ResponseEntity<BaseResponse<List<PurchaseDto>>> getPurchaseListByUserName(
             @PathVariable String userName) {
         return new ResponseEntity<>(
                 new BaseResponse(ResultCode.SUCCESS.name(),
@@ -68,7 +69,7 @@ public class PurchaseController {
     }
 
     @GetMapping("/products/purchase/current")
-    public ResponseEntity<BaseResponse<List<Purchase>>> getPurchaseListByCurrentUser() {
+    public ResponseEntity<BaseResponse<List<PurchaseDto>>> getPurchaseListByCurrentUser() {
         return new ResponseEntity<>(
                 new BaseResponse(ResultCode.SUCCESS.name(),
                         purchaseService.getPurchaseListByCurrentUser(),

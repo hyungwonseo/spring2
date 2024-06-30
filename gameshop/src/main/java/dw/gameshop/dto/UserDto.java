@@ -1,5 +1,6 @@
 package dw.gameshop.dto;
 
+import dw.gameshop.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,13 @@ public class UserDto {
     private String password;
     private String userName;
     private String userEmail;
+
+    public static UserDto toUserDto(User user) {
+        return new UserDto(
+                user.getUserId(),
+                null,
+                user.getUsername2(),
+                user.getEmail()
+        );
+    }
 }

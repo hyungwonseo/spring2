@@ -1,5 +1,6 @@
 package dw.gameshop.service;
 
+import dw.gameshop.dto.BoardDto;
 import dw.gameshop.exception.ResourceNotFoundException;
 import dw.gameshop.model.Board;
 import dw.gameshop.repository.BoardRepository;
@@ -15,21 +16,22 @@ public class BoardService {
     @Autowired
     private BoardRepository boardRepository;
 
-    public List<Board> getAllBoards() {
-        List<Board> boardList = boardRepository.findAll();
-        return boardList.stream().filter((b)->b.getIsActive()).collect(Collectors.toList());
+    public List<BoardDto> getAllBoards() {
+        List<Board> boardList = boardRepository.findAll()
+                .stream().filter((b)->b.getIsActive()).collect(Collectors.toList());
+        return boardList.stream().map((b)->BoardDto.toBoardDto(b)).collect(Collectors.toList());
     }
 
-    public Board saveBoard(Board board) {
+    public BoardDto saveBoard(Board board) {
         return boardRepository.findById(board.getId())
                 .map((existingBoard)->{
                     existingBoard.setModifiedDate(LocalDateTime.now());
-                    return boardRepository.save(existingBoard);
+                    return BoardDto.toBoardDto(boardRepository.save(existingBoard));
                 })
                 .orElseGet(()-> {
                     board.setCreatedDate(LocalDateTime.now());
                     board.setModifiedDate(LocalDateTime.now());
-                    return boardRepository.save(board);
+                    return BoardDto.toBoardDto(boardRepository.save(board));
                 });
     }
 

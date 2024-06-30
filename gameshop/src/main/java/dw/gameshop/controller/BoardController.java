@@ -1,6 +1,7 @@
 package dw.gameshop.controller;
 
 import dw.gameshop.dto.BaseResponse;
+import dw.gameshop.dto.BoardDto;
 import dw.gameshop.enumstatus.ResultCode;
 import dw.gameshop.model.Board;
 import dw.gameshop.service.BoardService;
@@ -18,7 +19,7 @@ public class BoardController {
     private BoardService boardService;
 
     @GetMapping("/board")
-    public ResponseEntity<BaseResponse<List<Board>>> getAllBoards() {
+    public ResponseEntity<BaseResponse<List<BoardDto>>> getAllBoards() {
         return new ResponseEntity<>(
                 new BaseResponse(ResultCode.SUCCESS.name(),
                         boardService.getAllBoards(),
